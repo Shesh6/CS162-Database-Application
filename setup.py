@@ -27,30 +27,30 @@ class House(Base):
 	list_date = Column(Date)
 	sold = Column(Boolean)
 
-	class Customer(Base):
-		__tablename__ = 'Customers'
-		id = Column(Integer, primary_key = True)
-		name = Column(Text)
+class Customer(Base):
+	__tablename__ = 'Customers'
+	id = Column(Integer, primary_key = True)
+	name = Column(Text)
 
-	class Office(Base):
-		__tablename__ = 'Offices'
-		id = Column(Integer, primary_key = True)
-		address = Column(Text)
+class Office(Base):
+	__tablename__ = 'Offices'
+	id = Column(Integer, primary_key = True)
+	address = Column(Text)
 
-	class Agent(Base):
-		__tablename__ = 'Agents'
-		id = Column(Integer, primary_key = True)
-		name = Column(Text)
-		handel = Column(Text)
+class Agent(Base):
+	__tablename__ = 'Agents'
+	id = Column(Integer, primary_key = True)
+	name = Column(Text)
+	handel = Column(Text)
 
-	class Sale(Base):
-		__tablename__ = 'Sales'
-		id = Column(Integer, primary_key = True)
-		house_id = Column(Integer, ForeignKey('Houses.id'), index=True)
-		buyer_id = Column(Integer, ForeignKey('Customers.id'), index=True)
-		sale_price = Column(Integer, nullable=False, index = True)
-		sale_date = Column(Date, index=True)
-		sale_commission = Column(Integer)
+class Sale(Base):
+	__tablename__ = 'Sales'
+	id = Column(Integer, primary_key = True)
+	house_id = Column(Integer, ForeignKey('Houses.id'), index=True)
+	buyer_id = Column(Integer, ForeignKey('Customers.id'), index=True)
+	sale_price = Column(Integer, nullable=False, index = True)
+	sale_date = Column(Date, index=True)
+	sale_commission = Column(Integer)
 
 # Add Sale
 def sell_house(house, buyer, date):
