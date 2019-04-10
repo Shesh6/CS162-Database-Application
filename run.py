@@ -15,8 +15,9 @@ q1 = session.query(
 	Office.address,
 	sales_count
 	).join(Office).filter(House.sold == True)\
-.group_by(House.office_id)\
-.order_by(sales_count.desc()).limit(5)
+	.group_by(House.office_id)\
+	.order_by(sales_count.desc())\
+	.limit(5)
 
 print(pd.read_sql(q1.statement, session.bind))
 
@@ -29,8 +30,9 @@ q2 = session.query(
 	Agent.handel,
 	agent_sale_count
 	).join(House).filter(House.sold == True)\
-.group_by(Agent.id)\
-.order_by(agent_sale_count.desc()).limit(5)
+	.group_by(Agent.id)\
+	.order_by(agent_sale_count.desc()).\
+	limit(5)
 
 print(pd.read_sql(q2.statement, session.bind))
 
@@ -41,7 +43,8 @@ q3 = session.query(
 	Agent.name,
 	total_coms
 	).join(House,House.agent_id == Agent.id)\
-.join(Sale, Sale.house_id == House.id).group_by(Agent.id)
+	.join(Sale, Sale.house_id == House.id)\
+	.group_by(Agent.id)
 
 print(pd.read_sql(q3.statement, session.bind))
 
@@ -64,7 +67,7 @@ print("For all houses that were sold that month, calculate the average selling p
 avg_price = func.avg(Sale.sale_price).label('Average Price')
 q5 = session.query(
 	avg_price)\
-.filter(extract('month', Sale.sale_date) == dt.today().month)
+	.filter(extract('month', Sale.sale_date) == dt.today().month)
 
 print(pd.read_sql(q5.statement, session.bind))
 

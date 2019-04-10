@@ -1,6 +1,6 @@
 # CS162 Assignment 2 - Database Application
 
-###Run Guide:
+### Run Guide:
 **setup.py** contains the database initialization, table specification and seed data insertion.
 **run.py** contains the queries required for the assignment, and prints them.
 ```
@@ -12,6 +12,8 @@ pip3 install -r requirements.txt
 python3 setup.py
 python3 run.py
 ```
+If anything goes wrong, the folder contains a notebook as well.
+
 ### Highlights
 
 Transactions are used in the seed data insertion, even though it's expected to run once, on a single system, with little risk of complication.

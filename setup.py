@@ -52,8 +52,15 @@ class Sale(Base):
 	sale_date = Column(Date, index=True)
 	sale_commission = Column(Integer)
 
+# Create tables
+Base.metadata.create_all(bind=engine)
+
 # Add Sale
 def sell_house(house, buyer, date):
+
+	# Open Session
+	Session = sessionmaker(bind=engine)
+	session = Session()
 
 	# Mark Sold
 	house_row = session.query(House).filter(House.id == house)
@@ -77,11 +84,13 @@ def sell_house(house, buyer, date):
 		sale_date = date,
 		sale_commission = commission))
 
-	# Commit Change
+	# Commit Change and close session
 	session.commit()
+	session.close()
 
 # Add Seed Data
-Base.metadata.create_all(bind=engine) 
+
+# Open Session
 Session = sessionmaker(bind=engine)
 session = Session()
 
